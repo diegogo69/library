@@ -7,49 +7,64 @@
 
     <link rel="stylesheet" href="styles.css">
     <script src="main.js" defer></script>
+
+    <style>
+        svg {
+            width: 24px;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Library</h1>
+        <h1>My Library</h1>
     </header>
     <main>
-        <!-- <button type="button">Add Book</button> -->
-        <table>
-            <caption>List with detailed information on the library's books</caption>
-            <thead>
-                <tr>
-                    <th>Author</th>
-                    <th>Title</th>
-                    <th>Pages</th>
-                    <th>Status</th>
-                    <th>Opt</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
+        <!-- unread -->
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Read</title><path d="M0.41,13.41L6,19L7.41,17.58L1.83,12M22.24,5.58L11.66,16.17L7.5,12L6.07,13.41L11.66,19L23.66,7M18,7L16.59,5.58L10.24,11.93L11.66,13.34L18,7Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Remove</title><path d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>Favorite</title><path d="M12,21.35L10.55,20.03C5.4,15.36 2,12.27 2,8.5C2,5.41 4.42,3 7.5,3C9.24,3 10.91,3.81 12,5.08C13.09,3.81 14.76,3 16.5,3C19.58,3 22,5.41 22,8.5C22,12.27 18.6,15.36 13.45,20.03L12,21.35Z" /></svg> -->
 
-        <h2>Add book</h2>
-        <form action="#" method="get">
-            <ul>
-                <li>
-                    <label for="author">Author</label>
-                    <input type="text" id="author" name="author"></li>
-                <li>
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title">
-                </li>
-                <li>
-                    <label for="pages">Pages</label>
-                    <input type="tel" id="pages" name="pages">
-                </li>
-                <li>
-                    <label for="read">Read</label>
-                    <input type="checkbox" id="read" name="read">
-                </li>
-            </ul>
-            <button type="submit">Add</button>
-        </form>
+        <button type="button">Add Book</button>
+        <div class="table-container">
+            <table>
+                <caption>Library's book list</caption>
+                <thead>
+                    <tr>
+                        <th>Author</th>
+                        <th>Title</th>
+                        <th>Pages</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <dialog>
+            <h2>Add book</h2>
+            <form action="#" method="dialog">
+                <ul>
+                    <li>
+                        <label for="author">Author</label>
+                        <input type="text" id="author" name="author" required autofocus></li>
+                    <li>
+                        <label for="title">Title</label>
+                        <input type="text" id="title" name="title">
+                    </li>
+                    <li>
+                        <label for="pages">Pages</label>
+                        <input type="tel" id="pages" name="pages">
+                    </li>
+                    <li>
+                        <label for="read">Read</label>
+                        <input type="checkbox" id="read" name="read">
+                    </li>
+                </ul>
+                <button type="submit">Add</button>
+                <button type="button" class="cancel">Cancel</button>
+            </form>
+        </dialog>
     </main>
 </body>
 </html>
