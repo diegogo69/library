@@ -12,6 +12,11 @@ function Book(title, author, pages, read, favorite=false) {
     this.favorite = favorite;
 }
 
+// Get index in library of current Book instance
+Book.prototype.index = function() {
+    return myLibrary.indexOf(this);
+}
+
 function addBookToLibrary(book) {
     myLibrary.push(book);
 }
@@ -27,11 +32,10 @@ function toggleRead(book, event) {
 }
 
 function removeBook(book, event) {
-    let bookIndex = myLibrary.indexOf(book);
     
-    let row = document.querySelector(`tr[data-index="${bookIndex}"]`);
+    let row = document.querySelector(`tr[data-index="${book.index()}"]`);
     row.parentNode.removeChild(row);    
-    myLibrary[bookIndex] = null;
+    myLibrary[book.index()] = null;
     // myLibrary.splice(bookIndex, 1);
 }
 
@@ -48,53 +52,28 @@ function toggleFav(book, event){
 const table = document.querySelector('tbody');
 function createTable() {
     for (let book of myLibrary) {
-        let row = document.createElement('tr');
-        row.setAttribute('data-index', `${myLibrary.indexOf(book)}`);
-        for (let prop in book) {
-            let cell = document.createElement('td');
-            if (prop == "read") {
-                let readIcon = svgRead();
-                let removeIcon = svgRemove();
-                cell.classList.add('status');
-                cell.appendChild(readIcon);
-                cell.appendChild(removeIcon);
-
-                if (book[prop]) {
-                    readIcon.classList.toggle('read');
-                };
-            }
-            else if (prop == 'favorite') {
-                let favIcon = svgFav();
-                if (book[prop]) {
-                    favIcon.classList.toggle('favorite')
-                }
-                row.querySelector('.status').appendChild(favIcon);
-                continue;
-            }
-            else {
-                cell.textContent = book[prop];
-            }
-            row.appendChild(cell);
-        }
-        let bookIndex = document.createElement('input');
-        bookIndex.setAttribute('type', 'hidden');
-        bookIndex.setAttribute('value', `${myLibrary.indexOf(book)}`)
-        row.appendChild(bookIndex);
-        table.appendChild(row);
+        createBookRow(book);
     }
 }
 
-function updateTable(book) {
+function createBookRow(book) {
     let row = document.createElement('tr');
-    row.setAttribute('data-index', `${myLibrary.indexOf(book)}`);
+    row.setAttribute('data-index', `${book.index()}`);
     for (let prop in book) {
         let cell = document.createElement('td');
-        if (prop == "read") {
+        if (prop == "index") {
+            continue
+        }
+        else if (prop == "read") {
             let readIcon = svgRead();
             let removeIcon = svgRemove();
             cell.classList.add('status');
             cell.appendChild(readIcon);
             cell.appendChild(removeIcon);
+
+            if (book[prop]) {
+                readIcon.classList.toggle('read');
+            };
         }
         else if (prop == 'favorite') {
             let favIcon = svgFav();
@@ -111,7 +90,7 @@ function updateTable(book) {
     }
     let bookIndex = document.createElement('input');
     bookIndex.setAttribute('type', 'hidden');
-    bookIndex.setAttribute('value', `${myLibrary.indexOf(book)}`)
+    bookIndex.setAttribute('value', `${book.index()}`)
     row.appendChild(bookIndex);
     table.appendChild(row);
 }
@@ -184,7 +163,7 @@ submit.addEventListener('click', event => {
     let read = (document.querySelector('input[name="read"]').checked);
 
     let book = addBook(author, title, pages, read);
-    updateTable(book);
+    createBookRow(book);
     // event.preventDefault()
 })
 
