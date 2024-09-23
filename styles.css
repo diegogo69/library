@@ -362,6 +362,9 @@ dialog {
 	align-self: center;
 	justify-self: center;
 
+	background-color: var(--bg-color);
+	border-radius: 1rem;
+
 }
 
 dialog .button-wrapper {
