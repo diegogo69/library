@@ -260,7 +260,7 @@ main {
 	flex: 1;
 	width: max(30rem, 80%);
 	margin: auto;
-	padding: 3%;
+	padding: 2% 3%;
 
 	display: flex;
 	align-items: center;
@@ -268,7 +268,7 @@ main {
 }
 
 .table-container {
-	height: 80vh;
+	height: 75vh;
 	border-radius: 1rem;
 	border: 3px solid var(--border);
 
@@ -304,8 +304,10 @@ tbody tr:nth-child(even) {
     background-color: transparent;
 }
 
-.status > * + * {
-	margin-left: .8rem;
+.status svg {
+	/* margin-left: .8rem; */
+	box-sizing: content-box;
+	padding: 0.4rem;
 }
 
 form {
