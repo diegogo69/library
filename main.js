@@ -27,16 +27,13 @@ function toggleRead(book, event) {
     } else if (book.read === false) {
         book.read = true;
     }
-
     event.target.closest('svg').classList.toggle('read');
 }
 
 function removeBook(book, event) {
-    
     let row = document.querySelector(`tr[data-index="${book.index()}"]`);
     row.parentNode.removeChild(row);    
     myLibrary[book.index()] = null;
-    // myLibrary.splice(bookIndex, 1);
 }
 
 function toggleFav(book, event){
@@ -45,17 +42,17 @@ function toggleFav(book, event){
     } else if (book.favorite === false) {
         book.favorite = true;
     }
-
     event.target.closest('svg').classList.toggle('favorite')
 }
 
+// create table for books
 const table = document.querySelector('tbody');
 function createTable() {
     for (let book of myLibrary) {
         createBookRow(book);
     }
 }
-
+// Create book row in the table
 function createBookRow(book) {
     let row = document.createElement('tr');
     row.setAttribute('data-index', `${book.index()}`);
@@ -66,11 +63,9 @@ function createBookRow(book) {
         }
         else if (prop == "read") {
             let readIcon = svgRead();
-            let removeIcon = svgRemove();
             cell.classList.add('status');
             cell.appendChild(readIcon);
-            cell.appendChild(removeIcon);
-
+            
             if (book[prop]) {
                 readIcon.classList.toggle('read');
             };
@@ -81,6 +76,8 @@ function createBookRow(book) {
                 favIcon.classList.toggle('favorite')
             }
             row.querySelector('.status').appendChild(favIcon);
+            let removeIcon = svgRemove();
+            row.querySelector('.status').appendChild(removeIcon);
             continue;
         }
         else {
@@ -141,9 +138,16 @@ function addBook(title, author, pages, read) {
     return book;
 }
 
-let book = addBook("Eloquent JavaScript", "Marijn Haverbeke", 435, false, true);
-let book2 = addBook("Programming Logic and Design", "Joyce Farrel", 717, true, true);
-let book3 = addBook("Think Like a Programmer", "Anton Spraul", 256, false, true);
+const initialBooks = [
+    ["Eloquent JavaScript", "Marijn Haverbeke", 435, false, true],
+    ["Programming Logic and Design", "Joyce Farrel", 717, true, true],
+    ["Think Like a Programmer", "Anton Spraul", 256, false, true]
+]
+
+// Add initial set of books to library
+for (let book of initialBooks) {
+    addBook(...book)
+}
 createTable();
 
 // reference form
@@ -152,10 +156,6 @@ const form = document.querySelector('form');
 const submit = document.querySelector('button[type="submit"]');
 submit.addEventListener('click', event => {
     if (!form.checkValidity()) {return}
-    log(document.querySelector('input[name="author"]').value);
-    log(document.querySelector('input[name="title"]').value);
-    log(document.querySelector('input[name="pages"]').value);
-    log(document.querySelector('input[name="read"]').checked);
 
     let author = (document.querySelector('input[name="author"]').value);
     let title = (document.querySelector('input[name="title"]').value);
