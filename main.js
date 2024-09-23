@@ -167,6 +167,7 @@ submit.addEventListener('click', event => {
     let read = (document.querySelector('input[name="read"]').checked);
 
     let book = addBook(author, title, pages, read);
+    form.reset();
     createBookRow(book);
     // event.preventDefault()
 })
