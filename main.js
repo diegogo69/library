@@ -2,17 +2,19 @@
 let myLibrary = [];
 
 // Book construcor
-function Book(title, author, pages, read, favorite=false) {
-    this.titlle = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.favorite = favorite;
-}
+class Book {
+    constructor(title, author, pages, read, favorite=false) {
+        this.titlle = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+        this.favorite = favorite;
+    }
 
-// Get index in library of current Book instance
-Book.prototype.index = function() {
-    return myLibrary.indexOf(this);
+    // Get index in library of current Book instance
+    index() {
+        return myLibrary.indexOf(this);
+    }
 }
 
 // Add book to library
